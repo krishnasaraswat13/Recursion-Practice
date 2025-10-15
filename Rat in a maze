@@ -1,0 +1,33 @@
+class Solution {
+    public ArrayList<String> ratInMaze(int[][] maze) {
+        // code here
+        ArrayList<String> ls=new ArrayList<>();
+        int n=maze.length;
+        int str=0;
+        int stc=0;
+        int enr=n-1;
+        int enc=n-1;
+        boolean valid[][]=new boolean[n][n];
+        rec(maze,str,stc,n,valid,ls,"");
+        Collections.sort(ls);
+        return ls;
+        
+    }
+    public void rec(int maze[][],int str,int stc,int n,boolean valid[][],ArrayList<String> ls,String path){
+        if(str<0 || str>=n || stc<0 || stc>=n || valid[str][stc]==true || maze[str][stc]==0){
+            return ;
+        }
+       
+        if(str==n-1 && stc==n-1){
+            ls.add(path);
+            return;
+        }
+         valid[str][stc]=true;
+        rec(maze,str-1,stc,n,valid,ls,path+'U');
+         rec(maze,str+1,stc,n,valid,ls,path+'D');
+          rec(maze,str,stc-1,n,valid,ls,path+'L');
+           rec(maze,str,stc+1,n,valid,ls,path+'R');
+           valid[str][stc]=false;
+           return ;
+    }
+}

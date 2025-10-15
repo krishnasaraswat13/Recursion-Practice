@@ -1,0 +1,38 @@
+class Solution {
+    public boolean exist(char[][] arr, String word) {
+       ArrayList<String> ls=new ArrayList<>();
+        for(int i=0;i<arr.length;i++){
+            for(int j=0;j<arr[0].length;j++){
+                if(arr[i][j]==word.charAt(0)){
+                    boolean ans=sol(arr,i,j,arr.length-1,arr[0].length-1,0,word);
+                    if(ans==true){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    public static boolean sol(char arr[][],int cr,int cc,int er,int ec,int idx,String word){
+        if(idx>=word.length()) return true;
+        if(cr<0 ||cc<0 ||cr>er ||cc>ec || arr[cr][cc]=='*') return false ;
+        char ch=word.charAt(idx);
+        if(ch==arr[cr][cc]){
+            char temp=arr[cr][cc];
+            arr[cr][cc]='*';
+            boolean up=sol(arr,cr-1,cc,er,ec,idx+1,word);
+            if(up==true) return true;
+            boolean down=sol(arr,cr+1,cc,er,ec,idx+1,word);
+             if(down==true) return true;
+            boolean left=sol(arr,cr,cc-1,er,ec,idx+1,word);
+             if(left==true) return true;
+            boolean right=sol(arr,cr,cc+1,er,ec,idx+1,word);
+             if(right==true) return true;
+             arr[cr][cc]=temp;
+             return false;
+        }
+        else{
+            return false;
+        }
+    }
+}

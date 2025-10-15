@@ -1,0 +1,14 @@
+class Solution {
+    public int cutRod(int[] price) {
+        // code here
+        return sol(price.length,price,0);
+    }
+    public static int sol(int n,int profit[],int ans){
+        if(n==0) return ans;
+        int max=0;
+        for(int cut=1;cut<=n;cut++){
+            max=Math.max(sol(n-cut,profit,ans+profit[cut-1]),max);
+        }
+        return max;
+    }
+}

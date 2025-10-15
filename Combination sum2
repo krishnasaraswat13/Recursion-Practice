@@ -1,0 +1,31 @@
+if(target==0) {
+           // if(!ls.contains(curr)){
+            ls.add(new ArrayList<>(curr));
+            return;
+        }
+
+        if(target<0) return;
+       
+       for (int i = idx; i < candidate.length; i++) {
+            
+            if (i > idx && candidate[i] == candidate[i - 1]) {
+                continue;
+            }
+             //if(idx>=candidate.length) return;
+        
+                if(candidate[idx]>target){
+                   break;
+                }
+            
+        //pick
+        curr.add(candidate[i]);
+        solve(candidate,i+1,target-candidate[i],curr,ls);
+       
+        //non pick
+        curr.remove(curr.size()-1);
+        //solve(candidate,idx+1,target,curr,ls);
+       }
+        
+    }
+}
+

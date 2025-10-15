@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> ls=new ArrayList<>();
+        solve(n,k,ls,new ArrayList<>());
+        return ls;
+    }
+    public static void solve(int n,int k,List<List<Integer>> ls,List<Integer> curr){
+       
+        if(k==0){
+             ls.add(new ArrayList<> (curr));
+             return;
+        }
+         if(n==0) return;
+        //pick
+        curr.add(n);
+        solve(n-1,k-1,ls,curr);
+        //not pick
+        curr.remove(curr.size()-1);
+        solve(n-1,k,ls,curr);
+    }
+}

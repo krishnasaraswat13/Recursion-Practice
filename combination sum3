@@ -1,0 +1,45 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int target) {
+        int candidate[]=new int[9];
+        for(int i=1;i<=9;i++){
+            candidate[i-1]=i;
+        }
+   List<List<Integer>> ls=new ArrayList<>();
+        Arrays.sort(candidate);
+        solve(candidate,0,target,new ArrayList<>(),ls,k);
+        return ls;
+    }
+    public static void solve(int[] candidate,int idx,int target,List<Integer> curr, List<List<Integer>> ls,int k){
+       
+        if(target==0) {
+           // if(!ls.contains(curr)){
+            if(curr.size()==k){
+            ls.add(new ArrayList<>(curr));
+            return;
+            }
+        }
+
+        if(target<0) return;
+       
+       for (int i = idx; i < candidate.length; i++) {
+            
+            if (i > idx && candidate[i] == candidate[i - 1]) {
+                continue;
+            }
+             //if(idx>=candidate.length) return;
+        
+                if(candidate[idx]>target){
+                   break;
+                }
+            
+        //pick
+        curr.add(candidate[i]);
+        solve(candidate,i+1,target-candidate[i],curr,ls,k);
+       
+        //non pick
+        curr.remove(curr.size()-1);
+        //solve(candidate,idx+1,target,curr,ls);
+       }
+        
+    }
+}
